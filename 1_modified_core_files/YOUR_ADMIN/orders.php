@@ -25,7 +25,8 @@
   // prepare order comment pulldown list
   $predefinedCommentsQuery = "SELECT comment_id, comment_title, comment_content
                               FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
-                              WHERE language_id = " . $_SESSION['languages_id'];
+                              WHERE language_id = " . $_SESSION['languages_id'] . "
+                              ORDER BY comment_id ASC";
   $predefinedComments = $db->Execute($predefinedCommentsQuery);
   $predefinedCommentsArray = array();
   $predefinedCommentsArray[0] = array('id' => NULL, 'text' => TEXT_SELECT_COMMENT);
@@ -377,18 +378,26 @@ function couponpopupWindow(url) {
 <script type="text/javascript">
   var commentsArray = new Array(
   <?php
+  $i = 0;
+  $len = count($predefinedCommentsArray);
+ // zc_dump($len);
   foreach ($predefinedCommentsArray as $value) {
-    echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'},";
+ //   zc_dump($i);
+    if($i == $len - 1) {
+      echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'}";
+    } else {
+      echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'},";
+    }
+    $i++;
   }
   ?>
-    {}
             );
 $(document).ready(function() {
   $('#predefined_comments').change(function(){
     val = $(":selected", this).index();
     $('textarea[name="comments"]').val(commentsArray[val].comment);
   });
-  });
+});
 </script>
 <?php // EOF Zen4All Order comment 2 of 3 ?>
 <!-- body //-->
