@@ -32,7 +32,7 @@ if ($zc150) { // continue Zen Cart 1.5.0
                    comment_id INT(11) NOT NULL AUTO_INCREMENT,
                    sort_order INT(3) DEFAULT NULL,
                    last_modified DATETIME NULL DEFAULT NULL,
-                   date_added DATETIME NOT NULL DEFAULT '0001-01-01 00:00:00',
+                   date_added DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    PRIMARY KEY (comment_id),
                    KEY idx_sort_order_zen (sort_order)
                  ) ENGINE = MyISAM;");
