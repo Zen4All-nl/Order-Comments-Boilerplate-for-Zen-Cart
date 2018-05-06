@@ -35,6 +35,7 @@
   foreach($predefinedComments as $predefinedComment) {
     $predefinedCommentsArray[] = array(
       'id' => $predefinedComment['comment_id'],
+      'text' => addslashes($predefinedComment['comment_title']),
       'content' => addslashes($predefinedComment['comment_content']));
   }
   /* EOF Zen4All Order Comment 1 of 3 */
