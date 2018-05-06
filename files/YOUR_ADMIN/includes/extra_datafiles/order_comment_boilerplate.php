@@ -7,5 +7,5 @@
  */
 
 define('FILENAME_ORDER_COMMENT_BOILERPLATE', 'order_comment_boilerplate');
-define('TABLE_ORDER_COMMENTS', 'order_comments');
-define('TABLE_ORDER_COMMENTS_CONTENT', 'order_comments_content');
+define('TABLE_ORDER_COMMENTS', DB_PREFIX . 'order_comments');
+define('TABLE_ORDER_COMMENTS_CONTENT', DB_PREFIX . 'order_comments_content');
