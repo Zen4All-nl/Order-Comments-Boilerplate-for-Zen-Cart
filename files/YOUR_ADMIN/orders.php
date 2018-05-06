@@ -25,15 +25,18 @@
   // prepare order comment pulldown list
   $predefinedCommentsQuery = "SELECT comment_id, comment_title, comment_content
                               FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
-                              WHERE language_id = " . $_SESSION['languages_id'] . "
+                              WHERE language_id = " . (int)$_SESSION['languages_id'] . "
                               ORDER BY comment_id ASC";
   $predefinedComments = $db->Execute($predefinedCommentsQuery);
   $predefinedCommentsArray = array();
-  $predefinedCommentsArray[0] = array('id' => NULL, 'text' => TEXT_SELECT_COMMENT);
+  $predefinedCommentsArray[0] = array(
+    'id' => NULL,
+    'text' => TEXT_SELECT_COMMENT);
   while(!$predefinedComments->EOF) {
-    $predefinedCommentsArray[] = array('id' => $predefinedComments->fields['comment_id'],
-                                     'text' => $predefinedComments->fields['comment_title'],
-                                     'content' => $predefinedComments->fields['comment_content']);
+    $predefinedCommentsArray[] = array(
+      'id' => $predefinedComments->fields['comment_id'],
+      'text' => $predefinedComments->fields['comment_title'],
+      'content' => $predefinedComments->fields['comment_content']);
     $predefinedComments->MoveNext();
   }
   // EOF Zen4All Order Comment 1 of 3
@@ -380,9 +383,7 @@ function couponpopupWindow(url) {
   <?php
   $i = 0;
   $len = count($predefinedCommentsArray);
- // zc_dump($len);
-  foreach ($predefinedCommentsArray as $value) {
- //   zc_dump($i);
+    foreach ($predefinedCommentsArray as $value) {
     if($i == $len - 1) {
       echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'}";
     } else {
