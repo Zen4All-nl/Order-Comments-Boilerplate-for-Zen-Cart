@@ -21,7 +21,7 @@
 
   include(DIR_WS_CLASSES . 'order.php');
 
-  // BOF Zen4All Order Comment 1 of 3
+  /* BOF Zen4All Order Comment 1 of 3 */
   // prepare order comment pulldown list
   $predefinedCommentsQuery = "SELECT comment_id, comment_title, comment_content
                               FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
@@ -32,14 +32,12 @@
   $predefinedCommentsArray[0] = array(
     'id' => NULL,
     'text' => TEXT_SELECT_COMMENT);
-  while(!$predefinedComments->EOF) {
+  foreach($predefinedComments as $predefinedComment) {
     $predefinedCommentsArray[] = array(
-      'id' => $predefinedComments->fields['comment_id'],
-      'text' => $predefinedComments->fields['comment_title'],
-      'content' => $predefinedComments->fields['comment_content']);
-    $predefinedComments->MoveNext();
+      'id' => $predefinedComment['comment_id'],
+      'content' => addslashes($predefinedComment['comment_content']));
   }
-  // EOF Zen4All Order Comment 1 of 3
+  /* EOF Zen4All Order Comment 1 of 3 */
 
   // prepare order-status pulldown list
   $orders_statuses = array();
@@ -377,7 +375,7 @@ function couponpopupWindow(url) {
   require(DIR_WS_INCLUDES . 'header.php');
 ?>
 <!-- header_eof //-->
-<?php // BOF Zen4All Order Comment 2 of 3 ?>
+<?php /* BOF Zen4All Order Comment 2 of 3 */ ?>
 <script type="text/javascript">
   var commentsArray = new Array(
   <?php
@@ -400,7 +398,7 @@ $(document).ready(function() {
   });
 });
 </script>
-<?php // EOF Zen4All Order Comment 2 of 3 ?>
+<?php /* EOF Zen4All Order Comment 2 of 3 */ ?>
 <!-- body //-->
 <table class="container-fluid" border="0" width="100%" cellspacing="2" cellpadding="2">
 <!-- body_text //-->
@@ -765,11 +763,11 @@ $(document).ready(function() {
       <tr>
         <td class="noprint"><?php echo zen_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
       </tr>
-      <?php // BOF Zen4All Order Comment 3 of 3 ?>
+      <?php /* BOF Zen4All Order Comment 3 of 3 */ ?>
       <tr>
         <td><?php echo ENTRY_PREDEFINED_COMMENTS; ?>&nbsp;<?php echo zen_draw_pull_down_menu('predefined_comments', $predefinedCommentsArray, '', 'id="predefined_comments"'); ?></td>
       </tr>
-      <?php // EOF Zen4All Order Comment 3 of 3 ?>
+      <?php /* EOF Zen4All Order Comment 3 of 3 */ ?>
       <tr><?php echo zen_draw_form('status', FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=update_order', 'post', '', true); ?>
         <td class="main noprint"><?php echo zen_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
       </tr>
