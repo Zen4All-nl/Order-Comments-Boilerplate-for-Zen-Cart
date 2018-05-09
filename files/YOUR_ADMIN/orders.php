@@ -35,7 +35,7 @@
   foreach($predefinedComments as $predefinedComment) {
     $predefinedCommentsArray[] = array(
       'id' => $predefinedComment['comment_id'],
-      'text' => addslashes($predefinedComment['comment_title']),
+      'text' => $predefinedComment['comment_title'],
       'content' => addslashes($predefinedComment['comment_content']));
   }
   /* EOF Zen4All Order Comment 1 of 3 */
@@ -384,9 +384,9 @@ function couponpopupWindow(url) {
   $len = count($predefinedCommentsArray);
     foreach ($predefinedCommentsArray as $value) {
     if($i == $len - 1) {
-      echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'}";
+      echo "{value : '" . $value['id'] . "', comment : `" . $value['content'] . "`}";
     } else {
-      echo "{value : '" . $value['id'] . "', comment : '" . $value['content'] . "'},";
+      echo "{value : '" . $value['id'] . "', comment : `" . $value['content'] . "`},";
     }
     $i++;
   }
