@@ -15,5 +15,5 @@ define('DATE_CREATED', 'Datum aangemaakt');
 define('DATE_MODIFIED', 'Datum aangepast');
 define('COMMENT_TITLE_HELP', 'Een korte title die getoond wordt in het selectiemenu');
 define('COMMENT_CONTENT_HELP', 'De inhoud van de opmerking. Dit mag zowel platte tekst als html code zijn');
-define('COMMENT_CONTENT_HELP', 'Sorteer volgorde');
+define('COMMENT_SORT_ORDER', 'Sorteer volgorde');
 define('TEXT_CONFIRM_DELETE', 'Bevestig om de opmerking te verwijderen');
