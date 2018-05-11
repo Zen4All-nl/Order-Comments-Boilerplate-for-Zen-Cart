@@ -295,7 +295,7 @@ if (zen_not_null($action)) {
               if (is_object($ocInfo)) {
                 $heading[] = array('text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>');
 
-                $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . $_GET['page'] : '') . '&ocid=' . $ocInfo->comment_id . '&action=new') . '" class="btn btn-primary">' . IMAGE_EDIT . '</a> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'ocid=' . $ocInfo->comment_id . (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] : '') . '$action=del') . '" class="btn btn-warning" role="button">' . IMAGE_DELETE . '</a>');
+                $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . $_GET['page'] : '') . '&ocid=' . $ocInfo->comment_id . '&action=new') . '" class="btn btn-primary">' . IMAGE_EDIT . '</a> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'ocid=' . $ocInfo->comment_id . (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] : '') . '&action=del') . '" class="btn btn-warning" role="button">' . IMAGE_DELETE . '</a>');
                 $commentContent = $db->Execute("SELECT comment_content
                                                 FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
                                                 WHERE comment_id = " . (int)$ocInfo->comment_id . "
