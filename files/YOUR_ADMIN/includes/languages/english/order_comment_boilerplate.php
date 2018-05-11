@@ -15,3 +15,5 @@ define('DATE_CREATED', 'Date created');
 define('DATE_MODIFIED', 'Date modified');
 define('COMMENT_TITLE_HELP', 'A short title that is shown as the title in the dropdown');
 define('COMMENT_CONTENT_HELP', 'The content of the comment. You can use plain text as wel as html tags');
+define('COMMENT_CONTENT_HELP', 'Sort Order');
+define('TEXT_CONFIRM_DELETE', 'Confirm to delete the comment');
