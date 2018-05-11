@@ -326,7 +326,7 @@ if (zen_not_null($action)) {
             </tr>
 
             <tr>
-              <td class="text-right" colspan="2"><a name="commentInsert" href="<?php echo zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&ocid=' . $ocInfo->comment_id . '&action=new'); ?>" class="btn btn-primary"><?php echo IMAGE_INSERT; ?></a></td>
+              <td class="text-right" colspan="2"><a name="commentInsert" href="<?php echo zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&action=new'); ?>" class="btn btn-primary"><?php echo IMAGE_INSERT; ?></a></td>
             </tr>
           </table>
         </div>
