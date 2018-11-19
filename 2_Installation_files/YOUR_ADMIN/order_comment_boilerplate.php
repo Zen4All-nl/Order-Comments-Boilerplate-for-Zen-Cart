@@ -68,9 +68,9 @@ if (zen_not_null($action)) {
     case 'deleteconfirm':
 
       $db->Execute("DELETE FROM " . TABLE_ORDER_COMMENTS . "
-                    WHERE commment_id = " . (int)$_POST['commment_id']);
+                    WHERE comment_id = " . (int)$_POST['comment_id']);
       $db->Execute("DELETE FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
-                    WHERE commment_id = " . (int)$_POST['commment_id']);
+                    WHERE comment_id = " . (int)$_POST['comment_id']);
 
       $messageStack->add_session(SUCCESS_COMMENT_REMOVED, 'success');
       zen_redirect(zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? 'page=' . (int)$_GET['page'] : '')));
@@ -290,7 +290,7 @@ if (zen_not_null($action)) {
             case 'del' :
               $heading[] = array('text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>');
 
-              $contents = array('form' => zen_draw_form('comments', FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&action=deleteconfirm') . zen_draw_hidden_field('commment_id', $ocInfo->comment_id));
+              $contents = array('form' => zen_draw_form('comments', FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&action=deleteconfirm') . zen_draw_hidden_field('comment_id', $ocInfo->comment_id));
               $contents[] = array('text' => TEXT_CONFIRM_DELETE);
               $contents[] = array('align' => 'center', 'text' => '<button type="submit" class="btn btn-danger">' . IMAGE_DELETE . '</button> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] . '&' : '') . (isset($_GET['ocid']) ? 'ocid=' . (int)$_GET['ocid'] : '')) . '" class="btn btn-default" role="button">' . IMAGE_CANCEL . '</a>');
               break;
