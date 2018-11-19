@@ -28,7 +28,7 @@ if (zen_not_null($action)) {
       }
       $comment_sort_order = zen_db_prepare_input($_POST['sort_order']);
       $sql_data_array = array(
-        'sort_order' => (int)$sort_order);
+        'sort_order' => (int)$comment_sort_order);
       if ($action == 'add') {
         $insert_sql_data = array('date_added' => 'now()');
 
@@ -49,7 +49,7 @@ if (zen_not_null($action)) {
         }
         $messageStack->add_session(SUCCESS_ORDER_COMMENT_INSERTED, 'success');
       } elseif ($action == 'upd') {
-        $sql_data_array = array('last_modified' => 'now()');
+        $sql_data_array = array('last_modified' => 'now()','sort_order' => (int)$comment_sort_order);
         zen_db_perform(TABLE_ORDER_COMMENTS, $sql_data_array, 'update', "comment_id = '" . (int)$comment_id . "'");
 
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
@@ -126,13 +126,14 @@ if (zen_not_null($action)) {
           $ocID = zen_db_prepare_input($_GET['ocid']);
           $commentInfo = $db->Execute("SELECT sort_order
                                        FROM " . TABLE_ORDER_COMMENTS . "
-                                       WHERE comment_id = " . $ocID);
+                                       WHERE comment_id = " . (int)$ocID);
           $ocInfo->updateObjectInfo($commentInfo->fields);
 
           $commentContents = $db->Execute("SELECT comment_title, comment_content, language_id
-                                    FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
-                                    WHERE comment_id = " . $ocID);
+                                           FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
+                                           WHERE comment_id = " . (int)$ocID);
 
+          $commentArray = array();
           foreach ($commentContents as $commentContent) {
             $commentArray[$commentContent['language_id']] = array(
               'comment_title' => $commentContent['comment_title'],
