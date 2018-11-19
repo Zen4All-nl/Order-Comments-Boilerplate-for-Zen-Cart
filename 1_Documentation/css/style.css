@@ -1,0 +1,68 @@
+a, a:active, a:visited {
+    color: #006666;
+    text-decoration: none;
+}
+a:hover {
+    color:#00CC99;
+    text-decoration: underline;
+}
+body, p, h1, h2, h3, h4, h5, h6, li, td, dd, dt, pre, code, img, table, #outer-container {
+    font-family: Roboto, Verdana, AvantGarde, Tahoma, Arial, sans-serif;
+    font-size: 12pt;
+    color: black;
+    padding: 0px;
+    margin: 20px;
+    line-height: 1.75em;
+}
+h1, h2, h3, h4 { font-weight: bold; }
+h1 { font-size: 20px; }
+h2 { font-size: 16px; }
+fieldset { padding: 10px; margin-top: 5px; }
+legend {
+    background-color: #eee;
+    border: 1px solid #666;
+    padding: 3px;
+    border-radius: 4px;
+}
+pre, code {
+    padding-left: 25px;
+    font-family: Courier;
+    font-size: 12pt;
+}
+pre.no-pad, code.no-pad { padding: 0; margin: 0; }
+ol li, ul li, ul li ul li { margin: 5px 0; padding: 0; }
+img { margin: 0 20px; float: left; border: 1px solid #666; }
+img.wide { width: 95%; float: none; margin: 0 2.5%; }
+textarea { width: 100%; }
+.corefile { color: red; }
+.template { color: green; }
+.file-changed { color: orange;}
+.file-added { color: green;}
+.file-removed { color: red;}
+.file-moved{color: blue;}
+.forward { float: right; }
+.removed { text-decoration: line-through; }
+.back { float: back; }
+.clearBoth { clear: both; }
+#buttons, #fa-buttons { margin-left: 20px; width: 300px; }
+#fa-buttons { margin-top: 5px; }
+table, td, th { border: 1px solid black; border-collapse: collapse; }
+td, th { padding: 5px; }
+th { background-color: #eee; }
+.smaller { font-size: smaller; }
+.left-pane { width: 49%; float: left; }
+.right-pane { width: 49%; float: right; }
+.multi-list { width: 32%; float: left; }
+#unsupported-templates { margin: 0 20px; border: 1px solid #444; border-radius: 6px; }
+
+.etabs { margin: 0; padding: 0; }
+.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; border-radius: 4px 4px 0 0; margin: 0; }
+.tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
+.tab a:hover { text-decoration: underline; }
+.tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
+.tab a.active { font-weight: bold; }
+.tab-container .panel-container { background: #fff; border: solid #666 1px; padding: 10px; border-radius: 0 4px 4px 4px; }
+.panel-container { margin-bottom: 10px; }
+@media (max-width: 979px) {
+    .multi-list { width: 95%; float: none; margin: 0 auto; }
+}
