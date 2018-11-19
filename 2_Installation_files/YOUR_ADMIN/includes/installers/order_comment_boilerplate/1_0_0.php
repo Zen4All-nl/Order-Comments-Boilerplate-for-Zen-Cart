@@ -30,7 +30,7 @@ if ($zc150) { // continue Zen Cart 1.5.0
 
    $db->Execute("CREATE TABLE IF NOT EXISTS " . TABLE_ORDER_COMMENTS . " (
                    comment_id INT(11) NOT NULL AUTO_INCREMENT,
-                   sort_order INT(3) DEFAULT NULL,
+                   sort_order INT(3) NOT NULL DEFAULT '0',
                    last_modified DATETIME NULL DEFAULT NULL,
                    date_added DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    PRIMARY KEY (comment_id),
