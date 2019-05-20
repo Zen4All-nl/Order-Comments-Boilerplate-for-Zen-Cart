@@ -19,7 +19,7 @@ if ($zc150) { // continue Zen Cart 1.5.0
                               'Y',
                               $configuration_group_id);
         
-      $messageStack->add('Enabled MODULE Configuration Menu.', 'success');
+      $messageStack->add('Enabled ' . $module_name . ' Configuration Menu.', 'success');
     }
   }
 }
