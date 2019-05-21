@@ -14,10 +14,10 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-$module_constant = 'ORDER_COMMENT_BOILERPLATE_VERSION'; // This should be a UNIQUE name followed by _VERSION for convention
-$module_installer_directory = DIR_FS_ADMIN . 'includes/installers/order_comment_boilerplate'; // This is the directory your installer is in, usually this is lower case
-$module_name = "Order Comment Boilerplate"; // This should be a plain English or Other in a user friendly way
-$zencart_com_plugin_id = 0; // from zencart.com plugins - Leave Zero not to check
+$module_constant = 'ORDER_COMMENT_BOILERPLATE_VERSION';
+$module_installer_directory = DIR_FS_ADMIN . 'includes/installers/order_comment_boilerplate';
+$module_name = "Order Comment Boilerplate";
+$zencart_com_plugin_id = 2222;
 //Just change the stuff above... Nothing down here should need to change
 
 
