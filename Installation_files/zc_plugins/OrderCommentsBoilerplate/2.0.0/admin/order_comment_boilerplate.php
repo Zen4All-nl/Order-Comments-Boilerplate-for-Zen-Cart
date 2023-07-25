@@ -37,13 +37,12 @@ if (zen_not_null($action)) {
         zen_db_perform(TABLE_ORDER_COMMENTS, $sql_data_array);
 
         $comment_id = zen_db_insert_id();
-        for ($i = 0, $n = count($languages); $i < $n; $i++) {
-          $language_id = $languages[$i]['id'];
+        foreach ($languages as $language) {
           $sql_data_desc_array = [
             'comment_id' => zen_db_prepare_input($comment_id),
-            'language_id' => (int)$languages[$i]['id'],
-            'comment_title' => zen_db_prepare_input($_POST['comment_title'][$language_id]),
-            'comment_content' => zen_db_prepare_input($_POST['comment_content'][$language_id])
+            'language_id' => (int)$language['id'],
+            'comment_title' => zen_db_prepare_input($_POST['comment_title'][$language['id']]),
+            'comment_content' => zen_db_prepare_input($_POST['comment_content'][$language['id']])
           ];
           zen_db_perform(TABLE_ORDER_COMMENTS_CONTENT, $sql_data_desc_array);
         }
