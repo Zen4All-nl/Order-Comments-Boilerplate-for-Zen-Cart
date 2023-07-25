@@ -8,7 +8,7 @@
  * @version $Id: order_comment_boilerplate.php 1.0 2016-04-28
  */
 
-require('includes/application_top.php');
+require 'includes/application_top.php';
 
 $languages = zen_get_languages();
 $action = (isset($_GET['action']) ? $_GET['action'] : '');
@@ -37,27 +37,27 @@ if (zen_not_null($action)) {
         zen_db_perform(TABLE_ORDER_COMMENTS, $sql_data_array);
 
         $comment_id = zen_db_insert_id();
-        for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+        for ($i = 0, $n = count($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          $sql_data_desc_array = array(
+          $sql_data_desc_array = [
             'comment_id' => zen_db_prepare_input($comment_id),
             'language_id' => (int)$languages[$i]['id'],
             'comment_title' => zen_db_prepare_input($_POST['comment_title'][$language_id]),
             'comment_content' => zen_db_prepare_input($_POST['comment_content'][$language_id])
-          );
+          ];
           zen_db_perform(TABLE_ORDER_COMMENTS_CONTENT, $sql_data_desc_array);
         }
         $messageStack->add_session(SUCCESS_ORDER_COMMENT_INSERTED, 'success');
       } elseif ($action == 'upd') {
-        $sql_data_array = array('last_modified' => 'now()','sort_order' => (int)$comment_sort_order);
+        $sql_data_array = ['last_modified' => 'now()','sort_order' => (int)$comment_sort_order];
         zen_db_perform(TABLE_ORDER_COMMENTS, $sql_data_array, 'update', "comment_id = '" . (int)$comment_id . "'");
 
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $language_id = $languages[$i]['id'];
-          $sql_data_desc_array = array(
+          $sql_data_desc_array = [
             'comment_title' => zen_db_prepare_input($_POST['comment_title'][$language_id]),
             'comment_content' => zen_db_prepare_input($_POST['comment_content'][$language_id]),
-          );
+          ];
           zen_db_perform(TABLE_ORDER_COMMENTS_CONTENT, $sql_data_desc_array, 'update', "comment_id = " . (int)$comment_id . " and language_id = " . (int)$languages[$i]['id']);
         }
         $messageStack->add_session(SUCCESS_ORDER_COMMENT_UPDATED, 'success');
@@ -81,30 +81,11 @@ if (zen_not_null($action)) {
 <!doctype html>
 <html <?php echo HTML_PARAMS; ?>>
   <head>
-    <meta charset="<?php echo CHARSET; ?>">
-    <title><?php echo TITLE; ?></title>
-    <link rel="stylesheet" href="includes/stylesheet.css">
-    <link rel="stylesheet" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
-    <script src="includes/menu.js"></script>
-    <script src="includes/general.js"></script>
-    <script>
-      function init() {
-          cssjsmenu('navbar');
-          if (document.getElementById) {
-              var kill = document.getElementById('hoverJS');
-              kill.disabled = true;
-          }
-      }
-    </script>
-    <?php
-    if ($editor_handler != '') {
-      include ($editor_handler);
-    }
-    ?>
+    <?php require DIR_WS_INCLUDES . 'admin_html_head.php'; ?>
   </head>
-  <body onLoad="init()">
+  <body">
     <!-- header //-->
-    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <?php require DIR_WS_INCLUDES . 'header.php'; ?>
     <!-- header_eof //-->
 
     <!-- body //-->
@@ -115,9 +96,9 @@ if (zen_not_null($action)) {
       if ($action == 'new') {
         $formAction = 'add';
 
-        $parameters = array(
+        $parameters = [
           'sort_order' => ''
-        );
+        ];
 
         $ocInfo = new objectInfo($parameters);
         if (isset($_GET['ocid'])) {
@@ -133,11 +114,12 @@ if (zen_not_null($action)) {
                                            FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
                                            WHERE comment_id = " . (int)$ocID);
 
-          $commentArray = array();
+          $commentArray = [];
           foreach ($commentContents as $commentContent) {
-            $commentArray[$commentContent['language_id']] = array(
+            $commentArray[$commentContent['language_id']] = [
               'comment_title' => $commentContent['comment_title'],
-              'comment_content' => $commentContent['comment_content']);
+              'comment_content' => $commentContent['comment_content']
+            ];
           }
           $ocInfo->updateObjectInfo($commentArray);
         } elseif (zen_not_null($_POST)) {
@@ -154,7 +136,7 @@ if (zen_not_null($action)) {
             <?php echo zen_draw_label(COMMENT_TITLE, 'comment_title[]', 'class="control-label col-sm-3"'); ?>
           <div class="col-sm-9 col-md-6">
               <?php
-              for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+              for ($i = 0, $n = count($languages); $i < $n; $i++) {
                 $language_id = $languages[$i]['id'];
                 ?>
               <div class="input-group">
@@ -171,7 +153,7 @@ if (zen_not_null($action)) {
             <?php echo zen_draw_label(COMMENT_CONTENT, 'comment_content[]', 'class="control-label col-sm-3"'); ?>
           <div class="col-sm-9 col-md-6">
               <?php
-              for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
+              for ($i = 0, $n = count($languages); $i < $n; $i++) {
                 $language_id = $languages[$i]['id'];
                 ?>
               <div class="input-group">
@@ -282,31 +264,37 @@ if (zen_not_null($action)) {
             </table>
           </div>
           <?php
-          $heading = array();
-          $contents = array();
+          $heading = [];
+          $contents = [];
 
           switch ($action) {
             case 'delete' : // deprecated
             case 'del' :
-              $heading[] = array('text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>');
+              $heading[] = ['text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>'];
 
-              $contents = array('form' => zen_draw_form('comments', FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&action=deleteconfirm') . zen_draw_hidden_field('comment_id', $ocInfo->comment_id));
-              $contents[] = array('text' => TEXT_CONFIRM_DELETE);
-              $contents[] = array('align' => 'center', 'text' => '<button type="submit" class="btn btn-danger">' . IMAGE_DELETE . '</button> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] . '&' : '') . (isset($_GET['ocid']) ? 'ocid=' . (int)$_GET['ocid'] : '')) . '" class="btn btn-default" role="button">' . IMAGE_CANCEL . '</a>');
+              $contents = ['form' => zen_draw_form('comments', FILENAME_ORDER_COMMENT_BOILERPLATE, 'page=' . $_GET['page'] . '&action=deleteconfirm') . zen_draw_hidden_field('comment_id', $ocInfo->comment_id)];
+              $contents[] = ['text' => TEXT_CONFIRM_DELETE];
+              $contents[] = [
+                'align' => 'center',
+                'text' => '<button type="submit" class="btn btn-danger">' . IMAGE_DELETE . '</button> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] . '&' : '') . (isset($_GET['ocid']) ? 'ocid=' . (int)$_GET['ocid'] : '')) . '" class="btn btn-default" role="button">' . IMAGE_CANCEL . '</a>'
+              ];
               break;
             default:
               if (is_object($ocInfo)) {
-                $heading[] = array('text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>');
+                $heading[] = ['text' => '<h4>[' . $ocInfo->comment_id . ']  ' . $ocInfo->comment_title . '</h4>'];
 
-                $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . $_GET['page'] : '') . '&ocid=' . $ocInfo->comment_id . '&action=new') . '" class="btn btn-primary">' . IMAGE_EDIT . '</a> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'ocid=' . $ocInfo->comment_id . (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] : '') . '&action=del') . '" class="btn btn-warning" role="button">' . IMAGE_DELETE . '</a>');
+                $contents[] = [
+                  'align' => 'center',
+                  'text' => '<a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? '&page=' . $_GET['page'] : '') . '&ocid=' . $ocInfo->comment_id . '&action=new') . '" class="btn btn-primary">' . IMAGE_EDIT . '</a> <a href="' . zen_href_link(FILENAME_ORDER_COMMENT_BOILERPLATE, 'ocid=' . $ocInfo->comment_id . (isset($_GET['page']) ? '&page=' . (int)$_GET['page'] : '') . '&action=del') . '" class="btn btn-warning" role="button">' . IMAGE_DELETE . '</a>'
+                ];
                 $commentContent = $db->Execute("SELECT comment_content
                                                 FROM " . TABLE_ORDER_COMMENTS_CONTENT . "
                                                 WHERE comment_id = " . (int)$ocInfo->comment_id . "
                                                 AND language_id = " . (int)$_SESSION['languages_id']);
 
-                $contents[] = array('text' => COMMENT_CONTENT . '&nbsp;::&nbsp; ' . $commentContent->fields['comment_content']);
-                $contents[] = array('text' => DATE_CREATED . '&nbsp;::&nbsp; ' . zen_date_short($ocInfo->date_added));
-                $contents[] = array('text' => DATE_MODIFIED . '&nbsp;::&nbsp; ' . zen_date_short($ocInfo->last_modified));
+                $contents[] = ['text' => COMMENT_CONTENT . '&nbsp;::&nbsp; ' . $commentContent->fields['comment_content']];
+                $contents[] = ['text' => DATE_CREATED . '&nbsp;::&nbsp; ' . zen_date_short($ocInfo->date_added)];
+                $contents[] = ['text' => DATE_MODIFIED . '&nbsp;::&nbsp; ' . zen_date_short($ocInfo->last_modified)];
               }
               break;
           }
@@ -314,7 +302,7 @@ if (zen_not_null($action)) {
           <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 configurationColumnRight">
               <?php
               if ((zen_not_null($heading)) && (zen_not_null($contents))) {
-                $box = new box;
+                $box = new box();
                 echo $box->infoBox($heading, $contents);
               }
               ?>
@@ -341,8 +329,9 @@ if (zen_not_null($action)) {
 
     </div>
     <!-- footer //-->
-    <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+    <?php require DIR_WS_INCLUDES . 'footer.php'; ?>
     <!-- footer_eof //-->
   </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+<?php
+require DIR_WS_INCLUDES . 'application_bottom.php';
