@@ -124,8 +124,6 @@ if (zen_not_null($action)) {
         } elseif (zen_not_null($_POST)) {
           $ocInfo->updateObjectInfo($_POST);
         }
-        ?>
-        <?php
         echo zen_draw_form('new_comment', FILENAME_ORDER_COMMENT_BOILERPLATE, (isset($_GET['page']) ? 'page=' . (int)$_GET['page'] . '&' : '') . 'action=' . $formAction, 'post', 'enctype="multipart/form-data" class="form-horizontal"');
         if ($formAction == 'upd') {
           echo zen_draw_hidden_field('comment_id', $ocID);
