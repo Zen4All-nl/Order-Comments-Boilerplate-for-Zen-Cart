@@ -6,15 +6,19 @@
  */
 if (class_exists('AdminRequestSanitizer')) {
     $sanitizer = AdminRequestSanitizer::getInstance();
-    $group = array(
-        'comment_title' => array('sanitizerType' => 'PRODUCT_DESC_REGEX',
-                                   'method' => 'both',
-                                   'pages' => array('order_comment_boilerplate'),
-                                   'params' => array()),
-        'comment_content' => array('sanitizerType' => 'PRODUCT_DESC_REGEX',
-                                   'method' => 'both',
-                                   'pages' => array('order_comment_boilerplate'),
-                                   'params' => array()),
-        );
+    $group = [
+        'comment_title' => [
+            'sanitizerType' => 'PRODUCT_DESC_REGEX',
+            'method' => 'both',
+            'pages' => ['order_comment_boilerplate'],
+            'params' => []
+        ],
+        'comment_content' => [
+            'sanitizerType' => 'PRODUCT_DESC_REGEX',
+            'method' => 'both',
+            'pages' => ['order_comment_boilerplate'],
+            'params' => []
+        ],
+    ];
     $sanitizer->addComplexSanitization($group);
 }
