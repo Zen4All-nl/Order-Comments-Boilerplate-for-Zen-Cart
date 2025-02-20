@@ -7,13 +7,17 @@
  * @version $Id: order_comment_boilerplate.php 1.0 2016-04-28
  */
 
-define('HEADING_TITLE', 'Order Comment Boilerplate');
-define('COMMENT_ID', 'Id');
-define('COMMENT_TITLE', 'Title');
-define('COMMENT_CONTENT', 'Content');
-define('DATE_CREATED', 'Date created');
-define('DATE_MODIFIED', 'Date modified');
-define('COMMENT_TITLE_HELP', 'A short title that is shown as the title in the dropdown');
-define('COMMENT_CONTENT_HELP', 'The content of the comment. You can use plain text as wel as html tags');
-define('COMMENT_SORT_ORDER', 'Sort Order');
-define('TEXT_CONFIRM_DELETE', 'Confirm to delete the comment');
+$define=[
+  'HEADING_TITLE' => 'Order Comment Boilerplate',
+  'COMMENT_ID' => 'Id',
+  'COMMENT_TITLE' => 'Title',
+  'COMMENT_CONTENT' => 'Content',
+  'DATE_CREATED' => 'Date created',
+  'DATE_MODIFIED' => 'Date modified',
+  'COMMENT_TITLE_HELP' => 'A short title that is shown as the title in the dropdown',
+  'COMMENT_CONTENT_HELP' => 'The content of the comment. You can use plain text as wel as html tags',
+  'COMMENT_SORT_ORDER' => 'Sort Order',
+  'TEXT_CONFIRM_DELETE' => 'Confirm to delete the comment',
+];
+
+return $define;
