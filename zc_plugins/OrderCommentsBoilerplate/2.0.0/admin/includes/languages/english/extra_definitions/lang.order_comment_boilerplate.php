@@ -8,9 +8,9 @@
  */
 
 $define = [
-  'BOX_TOOLS_ORDER_COMMENT_BOILERPLATE' => 'Order Comment Boilerplate',
-  'ENTRY_PREDEFINED_COMMENTS' => 'Predefined Comments',
-  'TEXT_SELECT_COMMENT' => '-- Please choose --',
+    'BOX_TOOLS_ORDER_COMMENT_BOILERPLATE' => 'Order Comment Boilerplate',
+    'ENTRY_PREDEFINED_COMMENTS' => 'Predefined Comments',
+    'TEXT_SELECT_COMMENT' => '-- Please choose --',
 ];
 
 return $define;
