@@ -55,7 +55,7 @@ foreach ($predefinedCommentsArray as $value) {
     commentHtml += '  </div>\n';
     commentHtml += '</div>\n';
 
-    $('form[name="statusUpdate"]').prepend(commentHtml);
+        $('form[name="statusUpdateForm"]').prepend(commentHtml);
 
     $('#predefined_comments').change(function () {
       var val = $(":selected", this).index();
